@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+
+  # Banco de dados para Saga Orchestrator
+  saga-db:
+    image: postgres:15
+    container_name: saga-db
+    environment:
+      POSTGRES_DB: saga_db
+      POSTGRES_USER: saga_user
+      POSTGRES_PASSWORD: saga_pass
+    ports:
+      - "5430:5432"
+    volumes:
+      - saga-data:/var/lib/postgresql/data
+
+  # Banco de dados para Reservation Service
+  reservation-db:
+    image: postgres:15
+    container_name: reservation-db
+    environment:
+      POSTGRES_DB: reservation_db
+      POSTGRES_USER: reservation_user
+      POSTGRES_PASSWORD: reservation_pass
+    ports:
+      - "5431:5432"
+    volumes:
+      - reservation-data:/var/lib/postgresql/data
+
+  # Banco de dados para Payment Service
+  payment-db:
+    image: postgres:15
+    container_name: payment-db
+    environment:
+      POSTGRES_DB: payment_db
+      POSTGRES_USER: payment_user
+      POSTGRES_PASSWORD: payment_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - payment-data:/var/lib/postgresql/data
+
+  # Banco de dados para Notification Service
+  notification-db:
+    image: postgres:15
+    container_name: notification-db
+    environment:
+      POSTGRES_DB: notification_db
+      POSTGRES_USER: notification_user
+      POSTGRES_PASSWORD: notification_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - notification-data:/var/lib/postgresql/data
+
+volumes:
+  reservation-data:
+  payment-data:
+  notification-data:
+  saga-data:
